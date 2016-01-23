@@ -1,0 +1,33 @@
+参考文法：
+P -> D              //声明语句
+P -> S              //赋值语句
+S -> S S            //赋值语句，可以在一行多个赋值语句
+
+/*声明语句*/
+D -> D D | proc id ; D S | T id;
+T -> X C | record D
+X -> integer | real
+C -> [num]C | ε
+
+/*赋值语句*/
+S -> id = E ;| L = E ;
+E -> E + E | E * E | -E | (E) | id | digit | L
+L -> id[E] | L[E]
+
+/*控制流语句*/
+S -> if B then S1
+    |if B then S1 else S2
+	  |while B do S1
+B -> B or B
+	 | B and B
+	 | not B
+	 | (B)
+	 | E relop E
+	 | true
+	 | false
+relop -> < | <= | == | != | > | >=
+
+/*过程调用*/
+S -> call id (Elist)
+Elist -> Elist, E
+Elist -> E
