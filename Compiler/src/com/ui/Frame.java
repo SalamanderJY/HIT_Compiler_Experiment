@@ -6,13 +6,22 @@
 
 package com.ui;
 
+//import com.ui.LineNumberHeaderView;
+
+import com.analyze.*;
+
 import java.awt.*;
 import java.io.*;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author  __USER__
+ * @author  wangjianyu
  */
 public class Frame extends javax.swing.JFrame {
+
+	private static final long serialVersionUID = 1L;
 
 	/** Creates new form Frame */
 	public Frame() {
@@ -26,12 +35,17 @@ public class Frame extends javax.swing.JFrame {
 	 */
 	//GEN-BEGIN:initComponents
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
+	@SuppressWarnings("serial")
 	private void initComponents() {
 
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea();
+		jScrollPane3 = new javax.swing.JScrollPane();
+		jTable2 = new javax.swing.JTable();
 		jScrollPane2 = new javax.swing.JScrollPane();
-		jList1 = new javax.swing.JList();
+		jTable1 = new javax.swing.JTable();
+		jScrollPane4 = new javax.swing.JScrollPane();
+		jTable3 = new javax.swing.JTable();
 		jMenuBar1 = new javax.swing.JMenuBar();
 		jMenu1 = new javax.swing.JMenu();
 		jMenuItem1 = new javax.swing.JMenuItem();
@@ -40,24 +54,47 @@ public class Frame extends javax.swing.JFrame {
 		jMenuItem2 = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setFocusable(false);
 
 		jTextArea1.setColumns(20);
 		jTextArea1.setRows(5);
 		jScrollPane1.setViewportView(jTextArea1);
+		jScrollPane1.setRowHeaderView(new LineNumberHeaderView());
+		jTable2.setModel(new javax.swing.table.DefaultTableModel(
+				new Object[][] {
 
-		jList1.setModel(new javax.swing.AbstractListModel() {
-			String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4",
-					"Item 5" };
+				}, new String[] { "Error at Line", "ËØ¥Êòé" }) {
+			boolean[] canEdit = new boolean[] { false, false };
 
-			public int getSize() {
-				return strings.length;
-			}
-
-			public Object getElementAt(int i) {
-				return strings[i];
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
 			}
 		});
-		jScrollPane2.setViewportView(jList1);
+		jScrollPane3.setViewportView(jTable2);
+
+		jTable1.setModel(new javax.swing.table.DefaultTableModel(
+				new Object[][] {
+
+				}, new String[] { "TOKEN", "Á±ªÂà´", "ÁßçÂà´Á†Å", "Ë°åÂè∑" }) {
+			boolean[] canEdit = new boolean[] { false, false, false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane2.setViewportView(jTable1);
+
+		jTable3.setModel(new javax.swing.table.DefaultTableModel(
+				new Object[][] {
+
+				}, new String[] { "Á¨¶Âè∑Ë°®", "POS" }) {
+			boolean[] canEdit = new boolean[] { false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane4.setViewportView(jTable3);
 
 		jMenu1.setText("File");
 
@@ -70,6 +107,11 @@ public class Frame extends javax.swing.JFrame {
 		jMenu1.add(jMenuItem1);
 
 		jMenuItem3.setText("Clear");
+		jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jMenuItem3ActionPerformed(evt);
+			}
+		});
 		jMenu1.add(jMenuItem3);
 
 		jMenuBar1.add(jMenu1);
@@ -77,6 +119,11 @@ public class Frame extends javax.swing.JFrame {
 		jMenu2.setText("Analyze");
 
 		jMenuItem2.setText("\u8bcd\u6cd5\u5206\u6790");
+		jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jMenuItem2ActionPerformed(evt);
+			}
+		});
 		jMenu2.add(jMenuItem2);
 
 		jMenuBar1.add(jMenu2);
@@ -89,65 +136,119 @@ public class Frame extends javax.swing.JFrame {
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup()
-								.addComponent(jScrollPane2,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(jScrollPane1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
-										645,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(217, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
 						javax.swing.GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
+								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.TRAILING)
 												.addComponent(
-														jScrollPane2,
+														jScrollPane3,
 														javax.swing.GroupLayout.Alignment.LEADING,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														364, Short.MAX_VALUE)
+														433, Short.MAX_VALUE)
 												.addComponent(
 														jScrollPane1,
+														javax.swing.GroupLayout.Alignment.LEADING,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														364, Short.MAX_VALUE))
+														433, Short.MAX_VALUE))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING,
+												false)
+												.addComponent(jScrollPane4, 0,
+														0, Short.MAX_VALUE)
+												.addComponent(
+														jScrollPane2,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														298, Short.MAX_VALUE))
+								.addContainerGap()));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.TRAILING,
+												false)
+												.addComponent(
+														jScrollPane2,
+														javax.swing.GroupLayout.Alignment.LEADING,
+														0, 0, Short.MAX_VALUE)
+												.addComponent(
+														jScrollPane1,
+														javax.swing.GroupLayout.Alignment.LEADING,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														317, Short.MAX_VALUE))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addGroup(
+										layout.createParallelGroup(
+												javax.swing.GroupLayout.Alignment.LEADING)
+												.addComponent(
+														jScrollPane4,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														151, Short.MAX_VALUE)
+												.addComponent(
+														jScrollPane3,
+														javax.swing.GroupLayout.DEFAULT_SIZE,
+														151, Short.MAX_VALUE))
 								.addContainerGap()));
 
 		pack();
 	}// </editor-fold>
 	//GEN-END:initComponents
 
-	//Œƒº˛¥Úø™∫Ø ˝
+	private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+		String program = jTextArea1.getText();
+		// Ê∏ÖÈô§ÂéüÊúâË°å
+		DefaultTableModel tableModel1 = (DefaultTableModel) jTable1.getModel();
+		tableModel1.setRowCount(0);
+		jTable1.invalidate();
+		DefaultTableModel tableModel2 = (DefaultTableModel) jTable2.getModel();
+		tableModel2.setRowCount(0);
+		jTable2.invalidate();
+		DefaultTableModel tableModel3 = (DefaultTableModel) jTable3.getModel();
+		tableModel3.setRowCount(0);
+		jTable3.invalidate();
+		//ÂàõÂª∫ËØçÊ≥ïÂàÜÊûêÁ±ª
+		Latex latex = new Latex(program, jTable1, jTable2, jTable3);
+		latex.analyze();
+
+	}
+
+	private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+		jTextArea1.setText("");
+	}
+
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
-		//≥ı ºªØŒƒº˛—°‘Ò¥∞ø⁄
+
 		FileDialog fileDialog;
 		//An abstract representation of file and directory pathnames. 
-		File file = null;		
-		Frame frame = null;		
+		File file = null;
+		Frame frame = null;
 		fileDialog = new FileDialog(frame, "Open", FileDialog.LOAD);
-		fileDialog.setVisible(true); //¥¥Ω®≤¢œ‘ æ¥Úø™Œƒº˛∂‘ª∞øÚ
+		fileDialog.setVisible(true);
 
-		try { //“‘ª∫≥Â«¯∑Ω Ω∂¡»°Œƒº˛ƒ⁄»›
-			
-	        jTextArea1.setText("");
+		try {
+			//Â∞ÜtextareaÊ∏ÖÁ©∫
+			jTextArea1.setText("");
 			file = new File(fileDialog.getDirectory(), fileDialog.getFile());
 			FileReader filereader = new FileReader(file);
 			BufferedReader bufferreader = new BufferedReader(filereader);
 			String aline;
 			while ((aline = bufferreader.readLine()) != null)
-				//∞¥––∂¡»°Œƒ±æ£¨œ‘ æ‘⁄TEXTAREA÷–
+
 				jTextArea1.append(aline + "\r\n");
 			filereader.close();
 			bufferreader.close();
-		
+
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -166,7 +267,6 @@ public class Frame extends javax.swing.JFrame {
 
 	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
-	private javax.swing.JList jList1;
 	private javax.swing.JMenu jMenu1;
 	private javax.swing.JMenu jMenu2;
 	private javax.swing.JMenuBar jMenuBar1;
@@ -175,7 +275,11 @@ public class Frame extends javax.swing.JFrame {
 	private javax.swing.JMenuItem jMenuItem3;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
+	private javax.swing.JScrollPane jScrollPane3;
+	private javax.swing.JScrollPane jScrollPane4;
+	private javax.swing.JTable jTable1;
+	private javax.swing.JTable jTable2;
+	private javax.swing.JTable jTable3;
 	private javax.swing.JTextArea jTextArea1;
 	// End of variables declaration//GEN-END:variables
-
 }
