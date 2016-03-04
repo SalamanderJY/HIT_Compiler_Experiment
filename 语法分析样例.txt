@@ -1,0 +1,19 @@
+int main(){
+    int i;
+    char t[6];
+    if(a > 0){
+      i += 1;
+    }
+    else{
+      i *= 2;
+    }
+    while(a>0){
+      
+    }
+    i = function();
+}
+
+int function () {
+     int i = 0;
+     return i;
+}
