@@ -78,6 +78,7 @@ define_stmt#double -> type IDN init vars ;
 define_stmt#void -> type IDN init vars ;
 define_stmt#unsigned -> type IDN init vars ;
 init#= -> = expression
+init#[ -> [ num_const ]
 init#, -> $
 init#; -> $
 vars#, -> , IDN init vars

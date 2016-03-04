@@ -12,6 +12,7 @@ import com.analyze.*;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -46,6 +47,8 @@ public class Frame extends javax.swing.JFrame {
 		jTable1 = new javax.swing.JTable();
 		jScrollPane4 = new javax.swing.JScrollPane();
 		jTable3 = new javax.swing.JTable();
+		jScrollPane5 = new javax.swing.JScrollPane();
+		jTable4 = new javax.swing.JTable();
 		jMenuBar1 = new javax.swing.JMenuBar();
 		jMenu1 = new javax.swing.JMenu();
 		jMenuItem1 = new javax.swing.JMenuItem();
@@ -60,7 +63,7 @@ public class Frame extends javax.swing.JFrame {
 		jTextArea1.setColumns(20);
 		jTextArea1.setRows(5);
 		jScrollPane1.setViewportView(jTextArea1);
-
+		jScrollPane1.setRowHeaderView(new LineNumberHeaderView());  
 		jTable2.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] {
 
@@ -96,6 +99,18 @@ public class Frame extends javax.swing.JFrame {
 			}
 		});
 		jScrollPane4.setViewportView(jTable3);
+
+		jTable4.setModel(new javax.swing.table.DefaultTableModel(
+				new Object[][] {
+
+				}, new String[] { "采用的产生式", "推导过程" }) {
+			boolean[] canEdit = new boolean[] { false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+		jScrollPane5.setViewportView(jTable4);
 
 		jMenu1.setText("File");
 
@@ -155,29 +170,33 @@ public class Frame extends javax.swing.JFrame {
 								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addComponent(
-														jScrollPane3,
-														javax.swing.GroupLayout.Alignment.LEADING,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														433, Short.MAX_VALUE)
+												javax.swing.GroupLayout.Alignment.LEADING,
+												false)
+												.addComponent(jScrollPane3, 0,
+														0, Short.MAX_VALUE)
 												.addComponent(
 														jScrollPane1,
-														javax.swing.GroupLayout.Alignment.LEADING,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														433, Short.MAX_VALUE))
+														443, Short.MAX_VALUE))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING,
+												javax.swing.GroupLayout.Alignment.TRAILING,
 												false)
-												.addComponent(jScrollPane4, 0,
-														0, Short.MAX_VALUE)
 												.addComponent(
-														jScrollPane2,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														298, Short.MAX_VALUE))
+														jScrollPane4,
+														javax.swing.GroupLayout.PREFERRED_SIZE,
+														247,
+														javax.swing.GroupLayout.PREFERRED_SIZE)
+												.addComponent(jScrollPane2, 0,
+														0, Short.MAX_VALUE))
+								.addPreferredGap(
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(jScrollPane5,
+										javax.swing.GroupLayout.PREFERRED_SIZE,
+										450,
+										javax.swing.GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()));
 		layout.setVerticalGroup(layout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,30 +205,42 @@ public class Frame extends javax.swing.JFrame {
 								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING,
-												false)
-												.addComponent(
-														jScrollPane2,
-														javax.swing.GroupLayout.Alignment.LEADING,
-														0, 0, Short.MAX_VALUE)
-												.addComponent(
-														jScrollPane1,
-														javax.swing.GroupLayout.Alignment.LEADING,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														317, Short.MAX_VALUE))
-								.addPreferredGap(
-										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addGroup(
-										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.LEADING)
 												.addComponent(
-														jScrollPane4,
+														jScrollPane5,
+														javax.swing.GroupLayout.Alignment.TRAILING,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														151, Short.MAX_VALUE)
-												.addComponent(
-														jScrollPane3,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														151, Short.MAX_VALUE))
+														476, Short.MAX_VALUE)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addGroup(
+																		layout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jScrollPane2,
+																						0,
+																						0,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						jScrollPane1,
+																						javax.swing.GroupLayout.PREFERRED_SIZE,
+																						317,
+																						javax.swing.GroupLayout.PREFERRED_SIZE))
+																.addPreferredGap(
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																.addGroup(
+																		layout.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.LEADING)
+																				.addComponent(
+																						jScrollPane4,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						151,
+																						Short.MAX_VALUE)
+																				.addComponent(
+																						jScrollPane3,
+																						javax.swing.GroupLayout.DEFAULT_SIZE,
+																						151,
+																						Short.MAX_VALUE))))
 								.addContainerGap()));
 
 		pack();
@@ -218,8 +249,25 @@ public class Frame extends javax.swing.JFrame {
 
 	private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
+		String program = jTextArea1.getText();
+		// 清除原有行
+		DefaultTableModel tableModel1 = (DefaultTableModel) jTable1.getModel();
+		tableModel1.setRowCount(0);
+		jTable1.invalidate();
+		DefaultTableModel tableModel2 = (DefaultTableModel) jTable2.getModel();
+		tableModel2.setRowCount(0);
+		jTable2.invalidate();
+		DefaultTableModel tableModel3 = (DefaultTableModel) jTable3.getModel();
+		tableModel3.setRowCount(0);
+		jTable3.invalidate();
+		//创建词法分析类
+		Latex latex = new Latex(program, jTable1, jTable2, jTable3);
+		ArrayList<String> tokenArray = new ArrayList<String>();
+		tokenArray = latex.analyze();
 		@SuppressWarnings("unused")
 		GrammerAnalyze grammerAnalyze = new GrammerAnalyze();
+		Parse parse = new Parse(tokenArray, jTable2, jTable4);
+		parse.Parsing();
 	}
 
 	private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,9 +346,11 @@ public class Frame extends javax.swing.JFrame {
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;
 	private javax.swing.JScrollPane jScrollPane4;
+	private javax.swing.JScrollPane jScrollPane5;
 	private javax.swing.JTable jTable1;
 	private javax.swing.JTable jTable2;
 	private javax.swing.JTable jTable3;
+	private javax.swing.JTable jTable4;
 	private javax.swing.JTextArea jTextArea1;
 	// End of variables declaration//GEN-END:variables
 }

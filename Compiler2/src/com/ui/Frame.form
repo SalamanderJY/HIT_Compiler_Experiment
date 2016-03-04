@@ -79,15 +79,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane3" alignment="0" pref="433" max="32767" attributes="1"/>
-                  <Component id="jScrollPane1" alignment="0" pref="433" max="32767" attributes="1"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane3" min="0" pref="0" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="443" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane4" min="0" pref="0" max="32767" attributes="1"/>
-                  <Component id="jScrollPane2" alignment="0" pref="298" max="32767" attributes="1"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jScrollPane4" min="-2" pref="247" max="-2" attributes="1"/>
+                  <Component id="jScrollPane2" min="0" pref="0" max="32767" attributes="1"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane5" min="-2" pref="450" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -96,14 +98,19 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                  <Component id="jScrollPane1" alignment="0" pref="317" max="32767" attributes="3"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane4" pref="151" max="32767" attributes="0"/>
-                  <Component id="jScrollPane3" alignment="0" pref="151" max="32767" attributes="0"/>
+                  <Component id="jScrollPane5" alignment="1" pref="476" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="0" pref="0" max="32767" attributes="1"/>
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="317" max="-2" attributes="3"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane4" pref="151" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" alignment="0" pref="151" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -179,6 +186,25 @@
               <Table columnCount="2" rowCount="0">
                 <Column editable="false" title="&#x7b26;&#x53f7;&#x8868;" type="java.lang.Object"/>
                 <Column editable="false" title="POS" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable4">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="2" rowCount="0">
+                <Column editable="false" title="&#x91c7;&#x7528;&#x7684;&#x4ea7;&#x751f;&#x5f0f;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x63a8;&#x5bfc;&#x8fc7;&#x7a0b;" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>

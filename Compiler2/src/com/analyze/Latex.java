@@ -23,8 +23,9 @@ public class Latex
 		this.jtable3 = jtable3;
 	}
 
-	public void analyze()
+	public ArrayList<String> analyze()
 	{
+		ArrayList<String> tokenArray = new ArrayList<String>();
 		String[] texts = text.split("\n");
 		symbol.clear();
 		symbol_pos = 0;
@@ -60,6 +61,7 @@ public class Latex
                             DefaultTableModel tableModel = (DefaultTableModel) jtable1.getModel();
                             tableModel.addRow(new Object[] {token, "关键字", "100", m+1});
                             jtable1.invalidate();
+                            tokenArray.add(token);
                         }
                         //是标识符
                         else {
@@ -75,6 +77,7 @@ public class Latex
                         	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                             tableModel1.addRow(new Object[] {token, "标识符", "200", m+1});
                             jtable1.invalidate();
+                            tokenArray.add("IDN");
                         }
                         token = "";
                     }
@@ -141,13 +144,15 @@ public class Latex
                             {  
                             	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                                 tableModel1.addRow(new Object[] {token, "浮点型常量", "300", m+1});
-                                jtable1.invalidate();    
+                                jtable1.invalidate();
+                                tokenArray.add("FLOAT");
                             } 
                             else
                             {  
                             	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                                 tableModel1.addRow(new Object[] {token, "整型常量", "301", m+1});
-                                jtable1.invalidate();   
+                                jtable1.invalidate(); 
+                                tokenArray.add("INT10");
                             }  
                         }
                         i--;
@@ -188,6 +193,7 @@ public class Latex
                         	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                             tableModel1.addRow(new Object[] {token, "字符常量", "302", m+1});
                             jtable1.invalidate(); 
+                            tokenArray.add("CHAR");
                         }     
                         token = "";
 					//识别字符常量
@@ -241,6 +247,7 @@ public class Latex
                         	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                             tableModel1.addRow(new Object[] {token, "字符串常量", "303", m+1});
                             jtable1.invalidate();  
+                            tokenArray.add("STR");
                         }  
                         token = "";		
 					//识别字符串常量	
@@ -278,6 +285,7 @@ public class Latex
                         			DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                                     tableModel1.addRow(new Object[] {token, "界符", "304", m+1});
                                     jtable1.invalidate();
+                                    tokenArray.add(token);
                                     isbound = true;
                                     break;
                         		}
@@ -287,6 +295,7 @@ public class Latex
                         		DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                                 tableModel1.addRow(new Object[] {token, "运算符", "305", m+1});
                                 jtable1.invalidate();
+                                tokenArray.add(token);
                         	}
                         }
                         else
@@ -294,6 +303,7 @@ public class Latex
                         	DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                             tableModel1.addRow(new Object[] {token, "运算符", "305", m+1});
                             jtable1.invalidate();
+                            tokenArray.add(token);
                         }
                         
                         token = "";	
@@ -318,7 +328,8 @@ public class Latex
                             }  
                             DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                             tableModel1.addRow(new Object[] {token, "运算符", "305", m+1});
-                            jtable1.invalidate();    
+                            jtable1.invalidate();  
+                            tokenArray.add(token);
                             token = "";  
                         }
                         // 注释可能是‘//’也可能是‘/*’
@@ -377,6 +388,7 @@ public class Latex
                         		DefaultTableModel tableModel1 = (DefaultTableModel) jtable1.getModel();
                                 tableModel1.addRow(new Object[] {token, "注释", "306", m+1});
                                 jtable1.invalidate();
+                                //tokenArray.add(token);
                         	}
                         	token = "";
                         //为注释	
@@ -400,6 +412,7 @@ public class Latex
 			}
 	    //遍历每行文本
 		}
+		return tokenArray;
 	//analyze()
     }
 
@@ -439,7 +452,7 @@ public class Latex
         "typedef", "char", "extern", "return", "union", "const", "float",  
         "short", "unsigned", "continue", "for", "signed", "void",  
         "default", "goto", "sizeof", "volatile", "do", "if", "while",  
-        "static", "main", "String"};
+        "static", "String"};
 	 public static char operator[] = { '+', '-', '*', '=', '<', '>', '&', '|', '~',  
          '^', '!', '(', ')', '[', ']', '{', '}', '%', ';', ',', '#', '.' };
 	public static char boundary[] = { ',', ';', '[', ']', '(', ')', '.', '{', '}'};

@@ -21,6 +21,7 @@ define_stmts -> define_stmt define_stmts
 define_stmts -> $
 define_stmt -> type IDN init vars ;
 init -> = expression
+init -> [ num_const ]
 init -> $
 vars -> , IDN init vars
 vars -> $
